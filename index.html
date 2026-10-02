@@ -75,7 +75,7 @@
         <!-- Subject Cards Grid: 2 columns layout -->
         <div class="grid grid-cols-2 gap-3 sm:gap-4 w-full">
             
-            <!-- Card 1: 中文 (Redirects to chi/chinese.html) -->
+            <!-- Card 1: 中文 (Redirects to chi/Chinese.html) -->
             <div class="group bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl p-4 shadow-md border-2 border-pink-300 flex flex-col items-center text-center transform transition duration-300 hover:scale-105 hover:shadow-xl pulse-glow relative overflow-hidden">
                 <div class="absolute top-2 right-2 text-pink-400 opacity-60 text-lg">📖</div>
                 <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-2 sm:mb-3 shadow-inner group-hover:rotate-12 transition duration-300">
@@ -85,7 +85,7 @@
                 <p class="text-[11px] sm:text-xs text-pink-500 font-medium mb-3">上學期</p>
                 
                 <div class="w-full flex flex-col space-y-2 mt-auto">
-                    <a href="chi/chinese.html"
+                    <a href="chi/Chinese.html"
                        onclick="triggerConfetti()"
                        class="w-full bg-white hover:bg-pink-500 text-pink-600 hover:text-white font-bold py-2 px-3 rounded-xl shadow-sm text-xs transition duration-300 flex items-center justify-center space-x-1 cursor-pointer border border-pink-200">
                         <span>📝</span>
@@ -150,15 +150,14 @@
             }
         }
 
-        // Background cheerful melody generator
         const melody = [
-            {note: 523.25, duration: 400}, // C5
-            {note: 587.33, duration: 400}, // D5
-            {note: 659.25, duration: 400}, // E5
-            {note: 698.46, duration: 400}, // F5
-            {note: 783.99, duration: 800}, // G5
-            {note: 659.25, duration: 400}, // E5
-            {note: 523.25, duration: 800}  // C5
+            {note: 523.25, duration: 400},
+            {note: 587.33, duration: 400},
+            {note: 659.25, duration: 400},
+            {note: 698.46, duration: 400},
+            {note: 783.99, duration: 800},
+            {note: 659.25, duration: 400},
+            {note: 523.25, duration: 800}
         ];
         let melodyIndex = 0;
 
@@ -207,7 +206,6 @@
             }
         }
 
-        // Confetti effect
         function triggerConfetti() {
             confetti({
                 particleCount: 100,
