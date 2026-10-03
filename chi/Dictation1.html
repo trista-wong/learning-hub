@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中文默書大冒險 🌟 (普通話版)</title>
+    <title>中文默書大冒險 🌟 (廣東話版)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -77,7 +77,7 @@
                 </div>
                 <div>
                     <h1 class="font-black text-lg sm:text-xl text-slate-800 leading-tight">中文默書大冒險</h1>
-                    <p class="text-xs text-emerald-600 font-medium">普通話標準發音溫習神器</p>
+                    <p class="text-xs text-emerald-600 font-medium">標準廣東話發音溫習神器</p>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
 
     <main class="max-w-4xl mx-auto px-4 py-6 w-full flex-grow">
         
-        <!-- Controls & Voice Settings Bar -->
+        <!-- Controls & Speed Settings Bar -->
         <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm mb-6 flex flex-wrap items-center justify-between gap-4">
             
             <!-- Category Selector -->
@@ -109,24 +109,17 @@
                 <select id="list-select" onchange="changeWordList(this.value)" class="bg-slate-50 border border-slate-200 text-slate-700 font-bold text-sm rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 outline-none">
                     <option value="part_a">甲：詞語 (10個)</option>
                     <option value="part_b">乙：句子 (1個)</option>
-                    <option value="part_c">丙：加分題 (10個數字)</option>
+                    <option value="part_c">丙：加分題 (10個)</option>
                     <option value="custom" disabled id="custom-option-tag">自訂詞單 (請先輸入)</option>
                 </select>
             </div>
 
-            <!-- Audio Settings -->
+            <!-- Audio Speed Settings -->
             <div class="flex items-center gap-3">
-                <!-- Speech Accent (Default to Mandarin as requested) -->
                 <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-                    <button id="btn-mandarin" onclick="setLanguage('zh-CN')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700">普通話</button>
-                    <button id="btn-cantonese" onclick="setLanguage('zh-HK')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800">廣東話</button>
-                </div>
-
-                <!-- Speech Speed -->
-                <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-                    <button id="speed-slow" onclick="setSpeed(0.6)" class="px-2 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800">🐢 慢</button>
-                    <button id="speed-normal" onclick="setSpeed(0.85)" class="px-2 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700">🚶 中</button>
-                    <button id="speed-fast" onclick="setSpeed(1.1)" class="px-2 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800">🐇 快</button>
+                    <button id="speed-slow" onclick="setSpeed(0.6)" class="px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800">🐢 慢</button>
+                    <button id="speed-normal" onclick="setSpeed(0.9)" class="px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700">🚶 中</button>
+                    <button id="speed-fast" onclick="setSpeed(1.1)" class="px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800">🐇 快</button>
                 </div>
             </div>
         </div>
@@ -179,7 +172,7 @@
         中文默書小幫手 &copy; 專為小朋友設計的快樂學習工具
     </footer>
 
-    <!-- Custom Word Modal (自訂詞單) -->
+    <!-- Custom Word Modal -->
     <div id="custom-word-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 pop-in">
             <div class="flex justify-between items-center mb-4">
@@ -230,51 +223,47 @@
     </div>
 
     <script>
-        // User Specific Presets
         const PRESETS = {
             part_a: [
-                { word: "你", pinyin: "nǐ", sentence: "你好嗎？" },
-                { word: "早", pinyin: "zǎo", sentence: "大家早安！" },
-                { word: "吹", pinyin: "chuī", sentence: "風把樹葉吹落了。" },
-                { word: "飛", pinyin: "fēi", sentence: "小鳥在天空中飛翔。" },
-                { word: "游", pinyin: "yóu", sentence: "小魚在水裏游來游去。" },
-                { word: "風", pinyin: "fēng", sentence: "秋天的風涼爽舒適。" },
-                { word: "長大", pinyin: "zhǎng dà", sentence: "我長大了，可以幫媽媽做家務。" },
-                { word: "老師", pinyin: "lǎo shī", sentence: "老師耐心地教導我們。" },
-                { word: "書包", pinyin: "shū bāo", sentence: "我把課本整齊地放入書包。" },
-                { word: "天空", pinyin: "tiān kōng", sentence: "藍色的天空飄着幾朵白雲。" }
+                { word: "你", note: "甲：詞語" },
+                { word: "早", note: "甲：詞語" },
+                { word: "吹", note: "甲：詞語" },
+                { word: "飛", note: "甲：詞語" },
+                { word: "游", note: "甲：詞語" },
+                { word: "風", note: "甲：詞語" },
+                { word: "長大", note: "甲：詞語" },
+                { word: "老師", note: "甲：詞語" },
+                { word: "書包", note: "甲：詞語" },
+                { word: "天空", note: "甲：詞語" }
             ],
             part_b: [
-                { word: "我們是小學生。", pinyin: "wǒ men shì xiǎo xué shēng.", sentence: "我們是充滿朝氣的小學生。" }
+                { word: "我們是小學生。", note: "乙：句子" }
             ],
             part_c: [
-                { word: "一", pinyin: "yī", sentence: "第一名" },
-                { word: "二", pinyin: "èr", sentence: "二月" },
-                { word: "三", pinyin: "sān", sentence: "三個人" },
-                { word: "四", pinyin: "sì", sentence: "四季" },
-                { word: "五", pinyin: "wǔ", sentence: "五星紅旗" },
-                { word: "六", pinyin: "liù", sentence: "六一兒童節" },
-                { word: "七", pinyin: "qī", sentence: "七彩虹" },
-                { word: "八", pinyin: "bā", sentence: "八方支援" },
-                { word: "九", pinyin: "jiǔ", sentence: "九月開學" },
-                { word: "十", pinyin: "shí", sentence: "十分感謝" }
+                { word: "一", note: "丙：加分題" },
+                { word: "二", note: "丙：加分題" },
+                { word: "三", note: "丙：加分題" },
+                { word: "四", note: "丙：加分題" },
+                { word: "五", note: "丙：加分題" },
+                { word: "六", note: "丙：加分題" },
+                { word: "七", note: "丙：加分題" },
+                { word: "八", note: "丙：加分題" },
+                { word: "九", note: "丙：加分題" },
+                { word: "十", note: "丙：加分題" }
             ]
         };
 
-        // Game State
         let state = {
-            currentMode: 'cards', // 'cards', 'choice', 'scramble', 'dictation'
+            currentMode: 'cards',
             currentListKey: 'part_a',
             words: [],
             currentIndex: 0,
             stars: 0,
-            speechLang: 'zh-CN', // Mandarin default as requested
-            speechSpeed: 0.85,
+            speechSpeed: 0.9,
             scrambleSelection: [],
             scrambleTiles: []
         };
 
-        // Web Audio API for FX
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         let audioCtx = null;
 
@@ -319,11 +308,10 @@
                     osc.stop(now + 0.08);
                 }
             } catch (e) {
-                // Ignore audio autoplay restrictions gracefully
+                // Ignore audio restriction gracefully
             }
         }
 
-        let currentAudioFallback = null;
         let autoSpeechTimer = null;
 
         function stopAllSpeech() {
@@ -334,14 +322,9 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }
-            if (currentAudioFallback) {
-                currentAudioFallback.pause();
-                currentAudioFallback.src = '';
-                currentAudioFallback = null;
-            }
         }
 
-        function triggerAutoSpeech(word, delay = 300) {
+        function triggerAutoSpeech(word, delay = 350) {
             if (autoSpeechTimer) {
                 clearTimeout(autoSpeechTimer);
                 autoSpeechTimer = null;
@@ -351,163 +334,67 @@
             }, delay);
         }
 
-        function base64ToArrayBuffer(base64) {
-            const binaryString = window.atob(base64);
-            const len = binaryString.length;
-            const bytes = new Uint8Array(len);
-            for (let i = 0; i < len; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            return bytes.buffer;
-        }
-
-        function pcmToWav(pcm16IntArray, sampleRate = 24000) {
-            const buffer = new ArrayBuffer(44 + pcm16IntArray.length * 2);
-            const view = new DataView(buffer);
-
-            function writeString(offset, string) {
-                for (let i = 0; i < string.length; i++) {
-                    view.setUint8(offset + i, string.charCodeAt(i));
-                }
-            }
-
-            writeString(0, 'RIFF');
-            view.setUint32(4, 36 + pcm16IntArray.length * 2, true);
-            writeString(8, 'WAVE');
-            writeString(12, 'fmt ');
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true); // PCM format
-            view.setUint16(22, 1, true); // Mono channel
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, sampleRate * 2, true);
-            view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true); // 16-bit
-            writeString(36, 'data');
-            view.setUint32(40, pcm16IntArray.length * 2, true);
-
-            for (let i = 0; i < pcm16IntArray.length; i++) {
-                view.setInt16(44 + i * 2, pcm16IntArray[i], true);
-            }
-
-            return new Blob([view], { type: 'audio/wav' });
-        }
-
-        async function speakWithGeminiTTS(text, lang, speed) {
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-            
-            const instruction = (lang === 'zh-CN') 
-                ? `請用標準普通話（國語）清晰朗讀此內容：${text}`
-                : `請用標準廣東話（粵語）清晰朗讀此內容：${text}`;
-
-            const payload = {
-                contents: [{ parts: [{ text: instruction }] }],
-                generationConfig: {
-                    responseModalities: ["AUDIO"],
-                    speechConfig: {
-                        voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: lang === 'zh-CN' ? "Kore" : "Puck" }
-                        }
-                    }
-                }
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                const part = result?.candidates?.[0]?.content?.parts?.[0];
-                const audioData = part?.inlineData?.data;
-                const mimeType = part?.inlineData?.mimeType || "";
-
-                if (audioData) {
-                    const rateMatch = mimeType.match(/rate=(\d+)/);
-                    const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
-                    const pcmBuffer = base64ToArrayBuffer(audioData);
-                    const pcm16 = new Int16Array(pcmBuffer);
-                    const wavBlob = pcmToWav(pcm16, sampleRate);
-                    const audioUrl = URL.createObjectURL(wavBlob);
-                    
-                    playAudioUrl(audioUrl, speed);
-                    return true;
-                }
-            } catch (err) {
-                console.warn("Gemini TTS fetch error, falling back:", err);
-            }
-            return false;
-        }
-
-        function playAudioUrl(url, speed) {
-            stopAllSpeech();
-            currentAudioFallback = new Audio(url);
-            currentAudioFallback.playbackRate = speed;
-            currentAudioFallback.play().catch(e => console.warn("Audio playback interrupted:", e));
-        }
-
-        function speakOnlineFallback(text, lang, speed) {
-            stopAllSpeech();
-            const type = (lang === 'zh-CN') ? '1' : '2';
-            const primaryUrl = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=${type}`;
-            const secondaryUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang === 'zh-CN' ? 'zh-CN' : 'zh-TW'}&client=tw-ob&q=${encodeURIComponent(text)}`;
-
-            currentAudioFallback = new Audio(primaryUrl);
-            currentAudioFallback.playbackRate = speed;
-
-            currentAudioFallback.onerror = () => {
-                currentAudioFallback = new Audio(secondaryUrl);
-                currentAudioFallback.playbackRate = speed;
-                currentAudioFallback.play().catch(e => console.warn("Secondary audio error:", e));
-            };
-
-            currentAudioFallback.play().catch(e => console.warn("Primary audio play error:", e));
-        }
-
-        async function speakWord(text, customSpeed = null) {
+        function speakWord(text, customSpeed = null) {
             if (!text) return;
             stopAllSpeech();
+
+            if (!('speechSynthesis' in window)) {
+                fallbackAudioSpeech(text);
+                return;
+            }
+
             const speed = customSpeed || state.speechSpeed;
-            const targetLang = state.speechLang;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = speed;
+            utterance.lang = 'zh-HK';
 
-            const geminiSuccess = await speakWithGeminiTTS(text, targetLang, speed);
-            if (geminiSuccess) return;
+            const voices = window.speechSynthesis.getVoices();
+            const targetVoice = voices.find(v => v.lang.toLowerCase().includes('zh-hk') || v.lang.toLowerCase().includes('yue'));
+            if (targetVoice) {
+                utterance.voice = targetVoice;
+            }
 
-            speakOnlineFallback(text, targetLang, speed);
+            utterance.onerror = () => {
+                fallbackAudioSpeech(text);
+            };
+
+            window.speechSynthesis.speak(utterance);
         }
 
-        function setLanguage(lang) {
-            state.speechLang = lang;
-            stopAllSpeech();
-
-            document.getElementById('btn-mandarin').className = lang === 'zh-CN' ? 
-                "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700" : 
-                "px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800";
-            document.getElementById('btn-cantonese').className = lang === 'zh-HK' ? 
-                "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700" : 
-                "px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800";
-            
-            renderMode();
+        function fallbackAudioSpeech(text) {
+            const audioUrl = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=2`;
+            const audio = new Audio(audioUrl);
+            audio.play().catch(e => console.warn("Audio fallback error:", e));
         }
 
         function setSpeed(speed) {
             state.speechSpeed = speed;
             ['slow', 'normal', 'fast'].forEach(s => {
                 const btn = document.getElementById(`speed-${s}`);
-                btn.className = "px-2 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800";
+                if (btn) btn.className = "px-2 py-1 text-xs font-bold rounded-lg transition text-slate-500 hover:text-slate-800";
             });
-            if (speed < 0.7) document.getElementById('speed-slow').className = "px-2 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
-            else if (speed > 1.0) document.getElementById('speed-fast').className = "px-2 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
-            else document.getElementById('speed-normal').className = "px-2 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
+            if (speed < 0.7) document.getElementById('speed-slow').className = "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
+            else if (speed > 1.0) document.getElementById('speed-fast').className = "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
+            else document.getElementById('speed-normal').className = "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-white shadow-xs text-emerald-700";
 
             if (state.words[state.currentIndex]) {
                 speakWord(state.words[state.currentIndex].word);
             }
         }
 
+        // Helper function to shuffle array
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
         function initGame() {
-            state.words = [...PRESETS[state.currentListKey]];
+            // Shuffle preset items upon starting or changing lists so the order is randomized
+            state.words = shuffleArray(PRESETS[state.currentListKey]);
             state.currentIndex = 0;
             renderMode();
         }
@@ -515,9 +402,9 @@
         function changeWordList(key) {
             state.currentListKey = key;
             if (key === 'custom') {
-                // Keep custom words
+                // Keep custom words as is or shuffled
             } else {
-                state.words = [...PRESETS[key]];
+                state.words = shuffleArray(PRESETS[key]);
             }
             state.currentIndex = 0;
             renderMode();
@@ -529,10 +416,12 @@
             
             ['cards', 'choice', 'scramble', 'dictation'].forEach(m => {
                 const tab = document.getElementById(`tab-${m}`);
-                if (m === mode) {
-                    tab.className = "mode-tab bg-emerald-500 text-white p-3 rounded-2xl font-bold flex flex-col items-center gap-1 shadow-md transition transform active:scale-95";
-                } else {
-                    tab.className = "mode-tab bg-white hover:bg-slate-50 text-slate-600 p-3 rounded-2xl font-bold flex flex-col items-center gap-1 border border-slate-200 transition transform active:scale-95";
+                if (tab) {
+                    if (m === mode) {
+                        tab.className = "mode-tab bg-emerald-500 text-white p-3 rounded-2xl font-bold flex flex-col items-center gap-1 shadow-md transition transform active:scale-95";
+                    } else {
+                        tab.className = "mode-tab bg-white hover:bg-slate-50 text-slate-600 p-3 rounded-2xl font-bold flex flex-col items-center gap-1 border border-slate-200 transition transform active:scale-95";
+                    }
                 }
             });
 
@@ -574,20 +463,21 @@
                             <div class="card-front absolute inset-0 flex flex-col items-center justify-center p-6">
                                 <div class="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">點擊翻轉卡片 🔄</div>
                                 <div class="text-4xl sm:text-5xl font-black text-slate-800 tracking-wider my-2">${item.word}</div>
-                                <div class="text-sm font-semibold text-slate-500 mt-2">${'拼音: ' + (item.pinyin || '')}</div>
+                                <div class="text-sm font-semibold text-slate-500 mt-2">${item.note || ''}</div>
                             </div>
 
                             <!-- Back Side -->
                             <div class="card-back absolute inset-0 flex flex-col items-center justify-center p-6 bg-slate-800 text-white rounded-3xl">
-                                <div class="text-xs text-slate-400 mb-2 font-bold uppercase">例句示範</div>
-                                <div class="text-lg font-medium leading-relaxed">${item.sentence || '暫無例句'}</div>
+                                <div class="text-xs text-slate-400 mb-2 font-bold uppercase">默書範圍</div>
+                                <div class="text-xl font-bold mb-2">${item.word}</div>
+                                <div class="text-sm font-medium text-emerald-300">加油！一定默到滿分！</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Pronounce Button -->
                     <button onclick="speakWord('${item.word}')" class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200 flex items-center justify-center gap-3 text-lg transition">
-                        <i class="fa-solid fa-volume-high text-xl"></i> 點擊聽普通話讀音
+                        <i class="fa-solid fa-volume-high text-xl"></i> 點擊聽讀音
                     </button>
                 </div>
             `;
@@ -638,13 +528,13 @@
         }
 
         function renderScrambleMode(container, currentItem) {
-            const chars = currentItem.word.split('');
-            const dummyPool = "天地日月水火木金土人文大小中男女日月光日月生學語文動";
-            let tilePool = [...chars];
+            const rawChars = currentItem.word.split('');
+            const dummyPool = ["你", "早", "吹", "飛", "游", "風", "學", "校", "生", "們", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "天", "空"];
             
-            while (tilePool.length < chars.length + (chars.length > 1 ? 3 : 0)) {
+            let tilePool = [...rawChars];
+            while (tilePool.length < Math.max(6, rawChars.length + 3)) {
                 const randomChar = dummyPool[Math.floor(Math.random() * dummyPool.length)];
-                if (!tilePool.includes(randomChar)) tilePool.push(randomChar);
+                tilePool.push(randomChar);
             }
             
             tilePool.sort(() => 0.5 - Math.random());
@@ -731,8 +621,8 @@
                         <button onclick="speakWord('${currentItem.word}')" class="w-20 h-20 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-2xl shadow-xl shadow-indigo-200 flex items-center justify-center mx-auto mb-3 transition active:scale-90">
                             <i class="fa-solid fa-volume-high"></i>
                         </button>
-                        <div class="text-xs font-bold text-indigo-600 mb-1">請聽普通話讀音，並在下方輸入框默寫</div>
-                        <button onclick="speakWord('${currentItem.word}', 0.5)" class="text-xs bg-white text-indigo-600 font-bold px-3 py-1 rounded-full border border-indigo-200 hover:bg-indigo-50">
+                        <div class="text-xs font-bold text-indigo-600 mb-1">請聽讀音，並在下方輸入框默寫</div>
+                        <button onclick="speakWord('${currentItem.word}', 0.6)" class="text-xs bg-white text-indigo-600 font-bold px-3 py-1 rounded-full border border-indigo-200 hover:bg-indigo-50">
                             🐢 慢速再讀一次
                         </button>
                     </div>
@@ -825,6 +715,8 @@
 
         function closeResultModal() {
             document.getElementById('result-modal').classList.add('hidden');
+            // Shuffle again when restarting so next round has a new randomized sequence
+            state.words = shuffleArray(PRESETS[state.currentListKey]);
             state.currentIndex = 0;
             renderMode();
         }
@@ -850,8 +742,7 @@
 
             PRESETS['custom'] = wordList.map(word => ({
                 word: word,
-                pinyin: "",
-                sentence: `自訂默書內容：${word}`
+                note: "自訂默書內容"
             }));
 
             const customOption = document.getElementById('custom-option-tag');
@@ -865,6 +756,11 @@
         }
 
         window.onload = function() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.onvoiceschanged = () => {
+                    window.speechSynthesis.getVoices();
+                };
+            }
             initGame();
         };
     </script>
