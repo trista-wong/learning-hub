@@ -1,85 +1,93 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>數學</title>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Itim&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-<!-- Confetti JS -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<style>
-body {
-font-family: 'Noto Sans TC', 'Itim', cursive, sans-serif;
-background: linear-gradient(135deg, #fffacd 0%, #fff8dc 50%, #ffe4b5 100%);
-background-size: 400% 400%;
-animation: gradientBG 15s ease infinite;
-min-height: 100vh;
-}
-@keyframes gradientBG {
-0% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-100% { background-position: 0% 50%; }
-}
-.float-animation {
-animation: float 3s ease-in-out infinite;
-}
-@keyframes float {
-0%, 100% { transform: translateY(0px); }
-50% { transform: translateY(-10px); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數學</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', 'Itim', cursive, sans-serif;
+            background: linear-gradient(135deg, #fffdf0 0%, #fffaf0 50%, #fffacd 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body class="flex flex-col items-center justify-between p-4 sm:p-6 relative overflow-x-hidden">
-<!-- Decorative background elements -->
-<div class="absolute top-10 left-6 text-3xl float-animation opacity-75 pointer-events-none">⭐</div>
-<div class="absolute top-16 right-8 text-3xl float-animation opacity-75 pointer-events-none" style="animation-delay: 1s;">🔢</div>
-<div class="absolute bottom-10 left-10 text-3xl float-animation opacity-75 pointer-events-none" style="animation-delay: 2s;">✨</div>
-<!-- Top Header -->
-<header class="w-full max-w-xl flex items-center justify-between mb-6 z-10 bg-white/80 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-md border border-amber-100">
-<a href="../index.html" class="flex items-center space-x-1 bg-amber-100 hover:bg-amber-200 text-amber-700 px-3.5 py-2 rounded-full font-bold shadow transition transform hover:scale-105 text-xs sm:text-sm cursor-pointer">
-<span>🏠</span>
-<span>返回主頁</span>
-</a>
-<h1 class="text-base sm:text-lg font-bold text-amber-700 tracking-wide">數學科學習專區</h1>
-<div class="w-16"></div>
-</header>
-<!-- Main Content (No Card Box, Header & Subheader outside) -->
-<main class="w-full max-w-xl flex flex-col items-center z-10 mb-6 flex-grow justify-center text-center">
-<!-- Header & Subheader Outside -->
-<div class="mb-6">
-<h2 class="text-2xl sm:text-3xl font-bold text-amber-800 tracking-wide mb-1">數學</h2>
-<p class="text-sm sm:text-base text-gray-500 font-medium bg-amber-50 inline-block px-4 py-1 rounded-full border border-amber-200 shadow-sm">
-📚 上學期
-</p>
-</div>
-<div class="w-20 h-20 sm:w-24 sm:h-24 bg-white/90 rounded-full flex items-center justify-center text-4xl sm:text-5xl mx-auto mb-6 shadow-md border border-amber-200 float-animation">
-🐱
-</div>
-<div class="w-full max-w-xs flex flex-col space-y-3">
-<a href="https://trista-wong.github.io/math-revsion/" target="_blank" rel="noopener noreferrer"
-onclick="triggerConfetti()"
-class="w-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transition transform hover:scale-105 flex items-center justify-center space-x-2 text-sm sm:text-base cursor-pointer">
-<span>🎯</span>
-<span>第一單元</span>
-<span>🌟</span>
-</a>
-</div>
-</main>
-<footer class="w-full text-center text-gray-500 text-xs z-10 py-2 border-t border-gray-200/50">
-<p>Made with 💖 for Smart Kids | 數學科學習幫手</p>
-</footer>
-<script>
-function triggerConfetti() {
-confetti({
-particleCount: 80,
-spread: 70,
-origin: { y: 0.6 },
-colors: ['#ffd700', '#ff8c00', '#fffacd', '#ffa500']
-});
-}
-</script>
+
+    <!-- Decorative background elements -->
+    <div class="absolute top-10 left-6 text-3xl float-animation opacity-75 pointer-events-none">⭐</div>
+    <div class="absolute top-16 right-8 text-3xl float-animation opacity-75 pointer-events-none" style="animation-delay: 1s;">🎯</div>
+    <div class="absolute bottom-10 left-10 text-3xl float-animation opacity-75 pointer-events-none" style="animation-delay: 2s;">🔢</div>
+
+    <!-- Top Header -->
+    <header class="w-full max-w-xl flex items-center justify-between mb-6 z-10 bg-white/80 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-md border border-amber-100">
+        <a href="../index.html" class="flex items-center space-x-1 bg-amber-100 hover:bg-amber-200 text-amber-700 px-3.5 py-2 rounded-full font-bold shadow transition transform hover:scale-105 text-xs sm:text-sm cursor-pointer">
+            <span>🏠</span>
+            <span>返回主頁</span>
+        </a>
+        <h1 class="text-base sm:text-lg font-bold text-amber-600 tracking-wide">數學科學習專區</h1>
+        <div class="w-16"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-xl flex flex-col items-center z-10 mb-6 flex-grow justify-center text-center">
+        
+        <!-- Header & Subheader Outside -->
+        <div class="mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-amber-700 tracking-wide mb-1">數學</h2>
+            <p class="text-sm sm:text-base text-gray-500 font-medium bg-amber-50 inline-block px-4 py-1 rounded-full border border-amber-100 shadow-sm">
+                🔢 上學期
+            </p>
+        </div>
+
+        <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white/90 rounded-full flex items-center justify-center text-4xl sm:text-5xl mx-auto mb-6 shadow-md border border-amber-200 float-animation">
+            🐱
+        </div>
+
+        <div class="w-full max-w-xs flex flex-col space-y-3">
+            <a href="math1.html"
+               onclick="triggerConfetti()"
+               class="w-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transition transform hover:scale-105 flex items-center justify-center space-x-2 text-sm sm:text-base cursor-pointer">
+                <span>🎯</span>
+                <span>第一單元</span>
+                <span>🌟</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="w-full text-center text-gray-500 text-xs z-10 py-2 border-t border-gray-200/50">
+        <p>Made with 💖 for Smart Kids | 數學科學習幫手</p>
+    </footer>
+
+    <script>
+        function triggerConfetti() {
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#f6e05e', '#ecc94b', '#fffacd', '#d69e2e']
+            });
+        }
+    </script>
 </body>
 </html>
