@@ -3,243 +3,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徐小學習平台 - 科目分類專區</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>基督教宣道會徐澤林紀念小學 - 網上自學平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', 'Inter', sans-serif;
+        }
+        .pastel-gradient {
+            background: linear-gradient(135deg, #fce7f3 0%, #fae8ff 50%, #e0f2fe 100%);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 min-h-screen font-sans text-slate-800">
-    <div id="app" class="flex flex-col min-h-screen">
-        <!-- Header -->
-        <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-inner">
-                        <i class="fa-solid fa-school-flag text-3xl text-amber-300"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-3xl font-extrabold tracking-tight">徐小學習平台</h1>
-                        <p class="text-blue-100 text-sm mt-1">按科目分類的電子學習資源與參考連結</p>
-                    </div>
+<body class="bg-gradient-to-br from-pink-50/50 via-purple-50/30 to-sky-50/50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <header class="bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/20 p-2.5 rounded-2xl backdrop-blur-md shadow-inner text-yellow-200">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
                 </div>
-                <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-xl text-sm border border-white/20">
-                    <i class="fa-solid fa-file-pdf text-rose-300 text-lg"></i>
-                    <a href="https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0" target="_blank" class="hover:underline text-white font-medium flex items-center gap-1.5">
-                        查看官方指引 PDF <i class="fa-solid fa-arrow-up-right-from-square text-xs text-blue-200"></i>
-                    </a>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight">基督教宣道會徐澤林紀念小學</h1>
+                    <p class="text-xs text-pink-100 flex items-center gap-2">
+                        <span>學校通告第80/2026號 - 網上學習平台專頁</span>
+                        <a href="https://www.ccl.edu.hk/" target="_blank" rel="noopener noreferrer" class="bg-white/20 hover:bg-white/30 text-white px-2.5 py-0.5 rounded-full text-[10px] transition inline-flex items-center gap-1 shadow-sm font-medium">
+                            <i class="fa-solid fa-file-pdf"></i> 參閱通告原檔 PDF
+                        </a>
+                    </p>
                 </div>
             </div>
-        </header>
+            <div class="flex items-center space-x-2 text-xs bg-white/25 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/30 text-white shadow-sm font-medium">
+                <i class="fa-solid fa-heart text-yellow-300 animate-bounce"></i>
+                <span>所有費用已由學校支付・學生毋須繳費</span>
+            </div>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-        <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8">
-            <!-- Search and Filter Bar -->
-            <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="relative w-full md:w-96">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-search"></i>
-                    </span>
-                    <input type="text" id="searchInput" placeholder="搜尋科目、資源或網址..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-sm transition-all">
-                </div>
-                <div class="flex flex-wrap gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0" id="categoryFilters">
-                    <button data-category="all" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-sm transition-all whitespace-nowrap">全部科目</button>
-                    <button data-category="chinese" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">中國語文</button>
-                    <button data-category="english" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">英國語文</button>
-                    <button data-category="math" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">數學</button>
-                    <button data-category="general" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">常識科</button>
-                    <button data-category="other" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">其他/通告</button>
-                </div>
+    <section class="pastel-gradient text-slate-700 py-8 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden border-b border-purple-100">
+        <!-- Cute decorative background floaters -->
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-pink-200/50 rounded-full blur-xl"></div>
+        <div class="absolute top-10 -right-6 w-32 h-32 bg-sky-200/50 rounded-full blur-xl"></div>
+        
+        <div class="max-w-3xl mx-auto relative z-10 space-y-2">
+            <div class="inline-flex items-center gap-2 bg-white text-purple-600 border border-purple-200 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                <i class="fa-solid fa-star text-amber-400"></i> 2026/2027 學年延伸學習平台 <i class="fa-solid fa-star text-amber-400"></i>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-3xl shadow-sm border border-purple-100">
+            <!-- Search Input -->
+            <div class="relative w-full md:w-96">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-purple-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="searchInput" placeholder="搜尋學科、平台名稱或關鍵字..." 
+                    class="w-full pl-11 pr-4 py-2.5 text-sm bg-purple-50/30 border border-purple-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition">
             </div>
 
-            <!-- Resource Cards Grid -->
-            <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cards injected via JS -->
+            <!-- Subject Category Filters -->
+            <div class="flex flex-wrap gap-1.5 w-full md:w-auto justify-start md:justify-end" id="filterButtons">
+                <button data-filter="all" class="filter-btn active bg-purple-500 text-white px-4 py-1.5 rounded-2xl text-xs font-semibold transition shadow-sm">全部學科</button>
+                <button data-filter="中文" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">中文科</button>
+                <button data-filter="英文" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">英文科</button>
+                <button data-filter="數學" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">數學科</button>
+                <button data-filter="常識" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">常識科</button>
+                <button data-filter="科學" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">科學/人文</button>
+                <button data-filter="普通話" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">普通話</button>
+                <button data-filter="音樂" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">音樂科</button>
+                <button data-filter="體育" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">體育科</button>
+                <button data-filter="資訊科技" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">資訊科技</button>
+                <button data-filter="其他" class="filter-btn bg-purple-50 hover:bg-purple-100 text-slate-700 px-3.5 py-1.5 rounded-2xl text-xs font-medium transition">其他平台</button>
             </div>
+        </div>
 
-            <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-20">
-                <div class="text-slate-300 text-6xl mb-4">
-                    <i class="fa-solid fa-folder-open"></i>
+        <div id="platformGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Platform cards will be injected by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="noResults" class="hidden text-center py-16 bg-white rounded-3xl border border-purple-100 shadow-sm mt-4">
+            <div class="text-purple-300 text-4xl mb-3"><i class="fa-solid fa-face-confused"></i></div>
+            <h3 class="text-base font-bold text-slate-700">找不到相關的學習平台</h3>
+            <p class="text-sm text-slate-500 mt-1">請嘗試換一個關鍵字或選擇其他學科分類搜尋。</p>
+        </div>
+    </main>
+
+    <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden transform transition-all border border-purple-100">
+            <div class="bg-gradient-to-r from-purple-500 to-sky-500 text-white p-5 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span id="modalCategoryBadge" class="bg-white/25 text-white text-xs px-3 py-1 rounded-full font-semibold">學科</span>
+                    <h3 id="modalTitle" class="text-lg font-bold">平台詳情</h3>
                 </div>
-                <p class="text-slate-600 font-semibold text-lg">找不到符合條件的學習科目或資源</p>
-                <p class="text-slate-400 text-sm mt-1">請嘗試檢索其他關鍵字或切換分類篩選</p>
+                <button onclick="closeModal()" class="text-white/85 hover:text-white bg-white/20 hover:bg-white/30 p-2 rounded-2xl transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-sm">
-            <p>徐小學習平台科目導航 &copy; 2026 | 參考檔案：2627_080.pdf</p>
-        </footer>
+            <div class="p-6 space-y-4 text-sm text-slate-600">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-500 mb-1">適用年級</h4>
+                    <p id="modalGrade" class="font-bold text-slate-800 text-base"></p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-500 mb-1">使用時段</h4>
+                    <p id="modalPeriod" class="font-medium text-slate-800"></p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-500 mb-1">平台網址 / 登入方式</h4>
+                    <div id="modalLinks" class="space-y-2 mt-1"></div>
+                </div>
+                <div class="bg-purple-50/40 p-4 rounded-2xl border border-purple-100">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-500 mb-2">查詢 / 聯絡方法</h4>
+                    <p id="modalContact" class="text-slate-700 font-medium whitespace-pre-line"></p>
+                </div>
+            </div>
+            <div class="bg-purple-50/20 px-6 py-4 border-t border-purple-100 flex justify-end">
+                <button onclick="closeModal()" class="bg-purple-100 hover:bg-purple-200 text-purple-700 px-5 py-2.5 rounded-2xl text-sm font-semibold transition">
+                    關閉
+                </button>
+            </div>
+        </div>
     </div>
 
+    <footer class="bg-white text-slate-500 py-8 text-center text-xs mt-12 border-t border-purple-100">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-bold text-slate-700">基督教宣道會徐澤林紀念小學 ‧ 網上學習平台支援中心</p>
+            <p>若家長遇到任何登入問題（如未能成功登入、未能顯示畫面、忘記密碼等），請根據各平台之聯絡方法直接向承辦公司查詢。</p>
+            <p class="text-purple-400 pt-2 font-medium">&copy; 2026 C.C.C. Kei Chi Secondary & Primary Schools. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        const resources = [
+        const platforms = [
             {
-                title: "中國語文：網上閱讀與字詞庫",
-                subject: "中國語文",
-                category: "chinese",
-                description: "提供豐富的中華文化、成語故事、字詞辨析與網上閱讀加強練習。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-book-bookmark",
-                badge: "中文科",
-                badgeColor: "bg-red-100 text-red-700 border border-red-200"
+                id: 1,
+                subject: "中文",
+                category: "中文",
+                name: "快樂閱讀花園",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "網上平台登入", url: "http://readinggarden.chinese.ephhk.com/" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "中國語文：普通話網上學習平台",
-                subject: "中國語文",
-                category: "chinese",
-                description: "透過聆聽錄音及拼音練習，提升普通話拼音技巧與日常對話能力。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-microphone-lines",
-                badge: "普通話專區",
-                badgeColor: "bg-red-100 text-red-700 border border-red-200"
+                id: 2,
+                subject: "中文",
+                category: "中文",
+                name: "我愛學語文",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "登入網站", url: "http://ephchinese.ephhk.com/" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "英國語文：Phonics & Reading 專區",
-                subject: "英國語文",
-                category: "english",
-                description: "提升拼讀能力（Phonics）、字彙量及互動英文故事閱讀，激發學習興趣。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-language",
-                badge: "英文科",
-                badgeColor: "bg-emerald-100 text-emerald-700 border border-emerald-200"
+                id: 3,
+                subject: "中文",
+                category: "中文",
+                name: "我愛閱讀花園",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "網上平台登入", url: "https://ephchi.ephhk.com/readinggarden/index.php" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "英國語文：網上趣味拼字與文法練習",
-                subject: "英國語文",
-                category: "english",
-                description: "透過遊戲化介面練習英語文法結構、詞性轉換與串字技巧。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-puzzle-piece",
-                badge: "英文互動",
-                badgeColor: "bg-emerald-100 text-emerald-700 border border-emerald-200"
+                id: 4,
+                subject: "英文",
+                category: "英文",
+                name: "教科書網上學習平台 (Pearson)",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "Pearson 官方網站", url: "http://www.pearson.com.hk/" }
+                ],
+                contact: "電話：2571-9831\n電郵：itsupport.hk@pearson.com"
             },
             {
-                title: "數學科：思維訓練與計算小達人",
+                id: 5,
+                subject: "英文",
+                category: "英文",
+                name: "Lango School",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "App Store 下載", url: "https://www.apple.com/hk/app-store/" },
+                    { label: "Google Play 下載", url: "https://play.google.com/" }
+                ],
+                contact: "WhatsApp：6201-8630\n電郵：info@lango.ai"
+            },
+            {
+                id: 6,
                 subject: "數學",
-                category: "math",
-                description: "加強四則運算、應用題解題邏輯與幾何圖形互動練習，鞏固數學基礎。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-calculator",
-                badge: "數學科",
-                badgeColor: "bg-amber-100 text-amber-700 border border-amber-200"
+                category: "數學",
+                name: "自主學習及診斷系統 2.0",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "系統登入頁面", url: "https://ephpmaths.ephhk.com/sds/home/login" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "數學科：STEM 奧數與解難挑戰站",
+                id: 7,
                 subject: "數學",
-                category: "math",
-                description: "提供趣味奧林匹克數學題目與動態解題示範，培養高階思維能力。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-brain",
-                badge: "奧數挑戰",
-                badgeColor: "bg-amber-100 text-amber-700 border border-amber-200"
+                category: "數學",
+                name: "小學數學新思維 - 學生網",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "學生網登入", url: "https://ephpmaths.ephhk.com/student/" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "常識科：科學探索與社會時事專區",
-                subject: "常識科",
-                category: "general",
-                description: "結合環保、個人健康、香港社會發展及基礎科學常識的線上閱讀與問答。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-globe",
-                badge: "常識科",
-                badgeColor: "bg-blue-100 text-blue-700 border border-blue-200"
+                id: 8,
+                subject: "常識",
+                category: "常識",
+                name: "常識教育網",
+                grade: "小三及小六",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "常識教育網學生登入", url: "https://ephgs.ephhk.com/student/" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "常識科：健康生活與公民教育網頁",
-                subject: "常識科",
-                category: "general",
-                description: "推廣健康飲食、良好生活習慣及公民權責的互動學習短片與練習。",
-                url: "https://www.ccl.edu.hk",
-                icon: "fa-heart-pulse",
-                badge: "健康教育",
-                badgeColor: "bg-blue-100 text-blue-700 border border-blue-200"
+                id: 9,
+                subject: "科學",
+                category: "科學",
+                name: "科學新領域",
+                grade: "小一、小二、小四及小五",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "科學新領域學生登入", url: "https://ephsci.ephhk.com/index.php/student" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
             },
             {
-                title: "官方通告與指引文件 (PDF)",
-                subject: "其他/通告",
-                category: "other",
-                description: "檢視 PDF 原檔案（2627_080.pdf）了解完整的連結清單與學校詳細通告內容。",
-                url: "https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0",
-                icon: "fa-file-pdf",
-                badge: "官方 PDF",
-                badgeColor: "bg-rose-100 text-rose-700 border border-rose-200"
+                id: 10,
+                subject: "人文",
+                category: "科學",
+                name: "今日人文",
+                grade: "小一、小二、小四及小五",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "今日人文學生登入", url: "https://ephhum.ephhk.com/index.php/student" }
+                ],
+                contact: "電話：2942-9338\nWhatsApp：6397-7553\n電郵：yukchoi@popularworld.com"
+            },
+            {
+                id: 11,
+                subject: "普通話",
+                category: "普通話",
+                name: "樂在普通話 - 智能評測系統",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "系統登入頁面", url: "https://pth-speak-assess.oupchina.com.hk/login" }
+                ],
+                contact: "WhatsApp：6016-2391 (Oxford University Press China Ltd)"
+            },
+            {
+                id: 12,
+                subject: "音樂",
+                category: "音樂",
+                name: "Oxford iSolution",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "Oxford iSolution 登入", url: "https://isolution.oupchina.com.hk" }
+                ],
+                contact: "WhatsApp：6016-2391 (Oxford University Press China Ltd)"
+            },
+            {
+                id: 13,
+                subject: "體育",
+                category: "體育",
+                name: "Learning Fun",
+                grade: "全校",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "Learning Fun 官方網頁", url: "https://www.learningfun.com.hk/index.php" }
+                ],
+                contact: "電話：5239-2214\n電郵：info@learningfun.com.hk"
+            },
+            {
+                id: 14,
+                subject: "資訊科技",
+                category: "資訊科技",
+                name: "現代教育資源庫 (學生版)",
+                grade: "小一至小三",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "資源庫學生登入", url: "https://www.mers.hk/login/student/" }
+                ],
+                contact: "電話：2990-9009\n電郵：enquiry@modernedu.hk"
+            },
+            {
+                id: 15,
+                subject: "資訊科技",
+                category: "資訊科技",
+                name: "iClass",
+                grade: "小四",
+                period: "2026年10月 至 2027年8月",
+                urls: [
+                    { label: "iClass 登入平台", url: "https://login.iclass.hk/" }
+                ],
+                contact: "電話：3500-5008\n電郵：ict@etextbook.hk"
+            },
+            {
+                id: 16,
+                subject: "其他",
+                category: "其他",
+                name: "香港教育城",
+                grade: "全校",
+                period: "不限時段",
+                urls: [
+                    { label: "教育城官方網站", url: "https://www.hkedcity.net/" }
+                ],
+                contact: "電話：2624-1000\n電郵：info@edcity.net"
+            },
+            {
+                id: 17,
+                subject: "其他",
+                category: "其他",
+                name: "本校網頁「學習天地 → 各科資訊」",
+                grade: "全校",
+                period: "不限時段",
+                urls: [
+                    { label: "學校主頁各科資訊", url: "https://www.ccl.edu.hk/" }
+                ],
+                contact: "電話：2381-3904 (徐澤林紀念小學)"
+            },
+            {
+                id: 18,
+                subject: "其他",
+                category: "其他",
+                name: "本校網頁「iLearning 學習平台」",
+                grade: "全校",
+                period: "不限時段",
+                urls: [
+                    { label: "iLearning Google 專頁", url: "https://sites.google.com/ccl.edu.hk/ilearning/" }
+                ],
+                contact: "電話：2381-3904 (徐澤林紀念小學)"
             }
         ];
 
-        const resourceGrid = document.getElementById('resourceGrid');
-        const searchInput = document.getElementById('searchInput');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const emptyState = document.getElementById('emptyState');
+        function renderPlatforms(items) {
+            const grid = document.getElementById('platformGrid');
+            const noResults = document.getElementById('noResults');
+            grid.innerHTML = '';
 
-        let currentCategory = 'all';
-        let searchQuery = '';
-
-        function renderResources() {
-            const filtered = resources.filter(item => {
-                const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
-                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                      item.subject.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCategory && matchesSearch;
-            });
-
-            resourceGrid.innerHTML = '';
-
-            if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
+            if (items.length === 0) {
+                noResults.classList.remove('hidden');
                 return;
             } else {
-                emptyState.classList.add('hidden');
+                noResults.classList.add('hidden');
             }
 
-            filtered.forEach(item => {
+            items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group";
+                card.className = "bg-white rounded-3xl border border-purple-100/80 shadow-sm hover:shadow-xl hover:border-purple-300 transition-all duration-300 flex flex-col overflow-hidden group";
+                
+                const primaryUrl = item.urls[0] ? item.urls[0].url : '#';
+
                 card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                <i class="fa-solid ${item.icon}"></i>
-                            </div>
-                            <span class="text-xs font-bold px-3 py-1 rounded-full ${item.badgeColor}">${item.badge}</span>
+                    <div class="p-6 flex-grow space-y-4">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="bg-purple-50 text-purple-600 border border-purple-200 text-xs font-bold px-3 py-1 rounded-full">
+                                ${item.subject}
+                            </span>
+                            <span class="text-xs font-semibold text-slate-500 bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
+                                ${item.grade}
+                            </span>
                         </div>
-                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">${item.subject}</span>
-                        <h3 class="text-lg font-bold text-slate-800 mt-1 mb-2 group-hover:text-blue-600 transition-colors">${item.title}</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6">${item.description}</p>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-800 group-hover:text-purple-600 transition">
+                                ${item.name}
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1.5 flex items-center space-x-1.5">
+                                <i class="fa-regular fa-clock text-purple-400"></i>
+                                <span>${item.period}</span>
+                            </p>
+                        </div>
                     </div>
-                    <a href="${item.url}" target="_blank" class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-700 border border-slate-200 hover:border-transparent py-2.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all">
-                        <span>進入科目連結</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    </a>
+                    <div class="bg-purple-50/30 px-6 py-3.5 border-t border-purple-100 flex items-center justify-between gap-2">
+                        <button onclick="openDetail(${item.id})" class="text-xs font-bold text-slate-600 hover:text-purple-600 transition flex items-center space-x-1">
+                            <i class="fa-solid fa-circle-info text-purple-400"></i>
+                            <span>詳情與聯絡</span>
+                        </button>
+                        <a href="${primaryUrl}" target="_blank" rel="noopener noreferrer" 
+                           class="bg-gradient-to-r from-purple-500 to-sky-500 hover:from-purple-600 hover:to-sky-600 text-white text-xs font-bold px-4 py-2 rounded-2xl transition flex items-center space-x-1.5 shadow-sm">
+                            <span>進入平台</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
                 `;
-                resourceGrid.appendChild(card);
+                grid.appendChild(card);
             });
         }
 
-        // Search event
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderResources();
-        });
+        function openDetail(id) {
+            const item = platforms.find(p => p.id === id);
+            if (!item) return;
 
-        // Filter events
+            document.getElementById('modalCategoryBadge').innerText = item.subject;
+            document.getElementById('modalTitle').innerText = item.name;
+            document.getElementById('modalGrade').innerText = item.grade;
+            document.getElementById('modalPeriod').innerText = item.period;
+            document.getElementById('modalContact').innerText = item.contact;
+
+            const linksContainer = document.getElementById('modalLinks');
+            linksContainer.innerHTML = '';
+            item.urls.forEach(u => {
+                const a = document.createElement('a');
+                a.href = u.url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.className = "flex items-center justify-between p-3 bg-purple-50/60 hover:bg-purple-100 border border-purple-200/80 rounded-2xl text-purple-900 font-semibold text-xs transition";
+                a.innerHTML = `<span><i class="fa-solid fa-link mr-2 text-purple-500"></i>${u.label}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+                linksContainer.appendChild(a);
+            });
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+
+        function filterAndSearch() {
+            const query = searchInput.value.toLowerCase();
+            const filtered = platforms.filter(p => {
+                const matchesCategory = currentFilter === 'all' || p.category === currentFilter;
+                const matchesSearch = p.name.toLowerCase().includes(query) || p.subject.toLowerCase().includes(query) || p.grade.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+            renderPlatforms(filtered);
+        }
+
+        searchInput.addEventListener('input', filterAndSearch);
+
         filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
                 filterButtons.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-                    b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                    b.classList.remove('bg-purple-500', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-purple-50', 'text-slate-700');
                 });
-                btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-                btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+                e.target.classList.remove('bg-purple-50', 'text-slate-700');
+                e.target.classList.add('bg-purple-500', 'text-white', 'shadow-sm');
 
-                currentCategory = btn.getAttribute('data-category');
-                renderResources();
+                currentFilter = e.target.getAttribute('data-filter');
+                filterAndSearch();
             });
         });
 
-        // Initial render
-        renderResources();
+        window.onload = function() {
+            renderPlatforms(platforms);
+        };
     </script>
 </body>
 </html>
-
-```eof
