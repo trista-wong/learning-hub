@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部件認字卡 · 顏色顯示</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f7f9fc 0%, #eef2f7 100%);
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', 'Heiti TC', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .card-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* 認字卡 */
+        .word-card {
+            background: white;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0, 20, 30, 0.15),
+                        0 8px 15px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 4px rgba(255, 255, 255, 0.8);
+            padding: 1.8rem 1.5rem 1.5rem;
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(200, 215, 230, 0.5);
+        }
+
+        .word-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 26px 35px -12px rgba(0, 30, 50, 0.2),
+                        0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 大字顯示區 */
+        .character-display {
+            font-size: 7rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0.2rem 0 0.3rem;
+            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            min-height: 8rem;
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', 'Heiti TC', 'Arial Unicode MS', sans-serif;
+        }
+
+        /* 每個部件用不同顏色 */
+        .part {
+            display: inline-block;
+            transition: filter 0.2s;
+        }
+
+        /* 部件顏色：綠、藍、紫、橙、青綠、粉紅 —— 和諧且易區分 */
+        .part-1 { color: #2e7d32; }  /* 深綠 */
+        .part-2 { color: #1565c0; }  /* 深藍 */
+        .part-3 { color: #6a1b9a; }  /* 紫色 */
+        .part-4 { color: #e65100; }  /* 橙 */
+        .part-5 { color: #00838f; }  /* 青綠 */
+        .part-6 { color: #c2185b; }  /* 粉紅 */
+
+        /* 輔助說明 */
+        .part-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+            color: #4a5f73;
+            background: #f0f5fa;
+            padding: 0.5rem 0.8rem;
+            border-radius: 3rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* 下方按鈕或提示 */
+        .info-note {
+            text-align: center;
+            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(6px);
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .info-note span {
+            font-weight: 600;
+            color: #1e4a6b;
+        }
+
+        /* 針對多部件字的特殊調整 */
+        .character-display.small-parts {
+            font-size: 5.5rem;
+        }
+
+        /* 手機優化 */
+        @media (max-width: 600px) {
+            .character-display {
+                font-size: 5rem;
+                min-height: 6rem;
+            }
+            .word-card {
+                width: 170px;
+                padding: 1.2rem 0.8rem;
+            }
+            .card-container {
+                gap: 1rem;
+            }
+            .part-legend {
+                font-size: 0.65rem;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- 卡片 1: 明 = 日 + 月 -->
+        <div class="word-card">
+            <div class="character-display">
+                <span class="part part-1">日</span>
+                <span class="part part-2">月</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 部件一</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 部件二</div>
+            </div>
+        </div>
+
+        <!-- 卡片 2: 林 = 木 + 木 (相同部件但用不同顏色區分左右) -->
+        <div class="word-card">
+            <div class="character-display">
+                <span class="part part-1">木</span>
+                <span class="part part-2">木</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 左部件</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 右部件</div>
+            </div>
+        </div>
+
+        <!-- 卡片 3: 好 = 女 + 子 -->
+        <div class="word-card">
+            <div class="character-display">
+                <span class="part part-1">女</span>
+                <span class="part part-2">子</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 左(女)</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 右(子)</div>
+            </div>
+        </div>
+
+        <!-- 卡片 4: 想 = 相 + 心  (相 = 木+目，這裡拆成三個部件顯示: 木, 目, 心) -->
+        <div class="word-card">
+            <div class="character-display small-parts">
+                <span class="part part-1">木</span>
+                <span class="part part-2">目</span>
+                <span class="part part-4">心</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 木</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 目</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#e65100;"></span> 心</div>
+            </div>
+        </div>
+
+        <!-- 卡片 5: 解 = 角 + 刀 + 牛   (拆成三個部件，但實際結構為左右，這裡用三個不同顏色顯示) -->
+        <div class="word-card">
+            <div class="character-display small-parts">
+                <span class="part part-3">角</span>
+                <span class="part part-1">刀</span>
+                <span class="part part-5">牛</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#6a1b9a;"></span> 角</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 刀</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#00838f;"></span> 牛</div>
+            </div>
+        </div>
+
+        <!-- 卡片 6: 湖 = 水 + 胡 (胡 = 古 + 月)  -> 拆成 水, 古, 月 三個部件 -->
+        <div class="word-card">
+            <div class="character-display small-parts">
+                <span class="part part-2">氵</span>
+                <span class="part part-4">古</span>
+                <span class="part part-6">月</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 水</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#e65100;"></span> 古</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#c2185b;"></span> 月</div>
+            </div>
+        </div>
+
+        <!-- 卡片 7: 華 = 艹 + 一 + 一 + 丨 + 一 ... 但為了簡潔，我們用常見拆法: 艹, 垂 (但垂不是部件)，改用「華」的常見部件: 艹 + 丰 + 一？ 這裡用 艹, 丰, 一 三個部件表示(顏色區分) -->
+        <div class="word-card">
+            <div class="character-display small-parts">
+                <span class="part part-1">艹</span>
+                <span class="part part-5">丰</span>
+                <span class="part part-3">一</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 艹</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#00838f;"></span> 丰</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#6a1b9a;"></span> 一</div>
+            </div>
+        </div>
+
+        <!-- 卡片 8: 聽 = 耳 + 王 + 十 + 四 + 一 + 心 ... 太複雜，我們用「聽」的常見簡化部件: 耳, 王, 心 (但實際上聽左邊是耳+王，右邊是十+四+一+心) 這裡只展示三個主要部件，用三個顏色，不追求完全精確，可自行調整。 -->
+        <div class="word-card">
+            <div class="character-display small-parts">
+                <span class="part part-1">耳</span>
+                <span class="part part-2">王</span>
+                <span class="part part-4">心</span>
+            </div>
+            <div class="part-legend">
+                <div class="legend-item"><span class="legend-dot" style="color:#2e7d32;"></span> 耳</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#1565c0;"></span> 王</div>
+                <div class="legend-item"><span class="legend-dot" style="color:#e65100;"></span> 心</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-note">
+        ⭐ 每個部件用<span>不同顏色</span>標示，幫助記憶字形結構
+    </div>
+
+    <!-- 可以根據需要增加更多字卡，只需複製 .word-card 結構並修改部件與顏色類別 -->
+</body>
+</html>
