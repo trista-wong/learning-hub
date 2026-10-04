@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徐小學習平台</title>
+    <title>徐小學習平台 - 科目分類專區</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-50 min-h-screen font-sans text-slate-800">
     <div id="app" class="flex flex-col min-h-screen">
         <!-- Header -->
-        <header class="bg-indigo-600 text-white shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center">
-                <div class="flex items-center space-x-3 mb-4 sm:mb-0">
-                    <div class="bg-white text-indigo-600 p-3 rounded-xl shadow-inner">
-                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+        <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-inner">
+                        <i class="fa-solid fa-school-flag text-3xl text-amber-300"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold tracking-tight">徐小學習平台</h1>
-                        <p class="text-indigo-200 text-sm">電子學習資源與重要連結分頁</p>
+                        <h1 class="text-3xl font-extrabold tracking-tight">徐小學習平台</h1>
+                        <p class="text-blue-100 text-sm mt-1">按科目分類的電子學習資源與參考連結</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 bg-indigo-700/60 px-4 py-2 rounded-lg text-sm border border-indigo-500/40">
-                    <i class="fa-solid fa-file-pdf text-rose-300"></i>
-                    <a href="https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0" target="_blank" class="hover:underline text-indigo-100 flex items-center gap-1">
-                        查看官方指引 PDF <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-xl text-sm border border-white/20">
+                    <i class="fa-solid fa-file-pdf text-rose-300 text-lg"></i>
+                    <a href="https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0" target="_blank" class="hover:underline text-white font-medium flex items-center gap-1.5">
+                        查看官方指引 PDF <i class="fa-solid fa-arrow-up-right-from-square text-xs text-blue-200"></i>
                     </a>
                 </div>
             </div>
@@ -35,85 +35,133 @@
             <!-- Search and Filter Bar -->
             <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="relative w-full md:w-96">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                         <i class="fa-solid fa-search"></i>
                     </span>
-                    <input type="text" id="searchInput" placeholder="搜尋學習資源或連結..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm text-sm">
+                    <input type="text" id="searchInput" placeholder="搜尋科目、資源或網址..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-sm transition-all">
                 </div>
-                <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryFilters">
-                    <button data-category="all" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white shadow-sm transition-all">全部資源</button>
-                    <button data-category="platform" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">線上平台</button>
-                    <button data-category="tool" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">學術工具</button>
-                    <button data-category="document" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">通告與參考</button>
+                <div class="flex flex-wrap gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0" id="categoryFilters">
+                    <button data-category="all" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-sm transition-all whitespace-nowrap">全部科目</button>
+                    <button data-category="chinese" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">中國語文</button>
+                    <button data-category="english" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">英國語文</button>
+                    <button data-category="math" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">數學</button>
+                    <button data-category="general" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">常識科</button>
+                    <button data-category="other" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all whitespace-nowrap">其他/通告</button>
                 </div>
             </div>
 
             <!-- Resource Cards Grid -->
             <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cards will be populated by JavaScript -->
+                <!-- Cards injected via JS -->
             </div>
 
             <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-16">
-                <div class="text-slate-300 text-5xl mb-3">
+            <div id="emptyState" class="hidden text-center py-20">
+                <div class="text-slate-300 text-6xl mb-4">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
-                <p class="text-slate-500 font-medium">找不到符合條件的學習資源</p>
+                <p class="text-slate-600 font-semibold text-lg">找不到符合條件的學習科目或資源</p>
+                <p class="text-slate-400 text-sm mt-1">請嘗試檢索其他關鍵字或切換分類篩選</p>
             </div>
         </main>
 
         <!-- Footer -->
         <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-sm">
-            <p>徐小學習平台 &copy; 2026 | 資料來源：學校通告及相關網上資源</p>
+            <p>徐小學習平台科目導航 &copy; 2026 | 參考檔案：2627_080.pdf</p>
         </footer>
     </div>
 
     <script>
         const resources = [
             {
-                title: "徐小通告與文件參考 (PDF)",
-                description: "檢視原檔案內容與相關官方指引、注意事項及各項通告詳情。",
-                url: "https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0",
-                category: "document",
-                icon: "fa-file-pdf",
-                badge: "官方文件",
-                badgeColor: "bg-rose-100 text-rose-700"
+                title: "中國語文：網上閱讀與字詞庫",
+                subject: "中國語文",
+                category: "chinese",
+                description: "提供豐富的中華文化、成語故事、字詞辨析與網上閱讀加強練習。",
+                url: "https://www.ccl.edu.hk",
+                icon: "fa-book-bookmark",
+                badge: "中文科",
+                badgeColor: "bg-red-100 text-red-700 border border-red-200"
             },
             {
-                title: "電子學習綜合平台",
-                description: "學校指定的網上學習及課業提交平台，方便同學隨時隨地進行網上自學。",
+                title: "中國語文：普通話網上學習平台",
+                subject: "中國語文",
+                category: "chinese",
+                description: "透過聆聽錄音及拼音練習，提升普通話拼音技巧與日常對話能力。",
                 url: "https://www.ccl.edu.hk",
-                category: "platform",
-                icon: "fa-laptop-code",
-                badge: "主要平台",
-                badgeColor: "bg-indigo-100 text-indigo-700"
+                icon: "fa-microphone-lines",
+                badge: "普通話專區",
+                badgeColor: "bg-red-100 text-red-700 border border-red-200"
             },
             {
-                title: "網上電子圖書館",
-                description: "提供豐富的電子圖書資源與閱讀獎勵計劃，培養良好閱讀習慣。",
+                title: "英國語文：Phonics & Reading 專區",
+                subject: "英國語文",
+                category: "english",
+                description: "提升拼讀能力（Phonics）、字彙量及互動英文故事閱讀，激發學習興趣。",
                 url: "https://www.ccl.edu.hk",
-                category: "tool",
-                icon: "fa-book-open",
-                badge: "閱讀專區",
-                badgeColor: "bg-emerald-100 text-emerald-700"
+                icon: "fa-language",
+                badge: "英文科",
+                badgeColor: "bg-emerald-100 text-emerald-700 border border-emerald-200"
             },
             {
-                title: "互動學科練習專區",
-                description: "涵蓋中文、英文、數學及常識科目的互動練習題目與自我評量。",
+                title: "英國語文：網上趣味拼字與文法練習",
+                subject: "英國語文",
+                category: "english",
+                description: "透過遊戲化介面練習英語文法結構、詞性轉換與串字技巧。",
                 url: "https://www.ccl.edu.hk",
-                category: "platform",
+                icon: "fa-puzzle-piece",
+                badge: "英文互動",
+                badgeColor: "bg-emerald-100 text-emerald-700 border border-emerald-200"
+            },
+            {
+                title: "數學科：思維訓練與計算小達人",
+                subject: "數學",
+                category: "math",
+                description: "加強四則運算、應用題解題邏輯與幾何圖形互動練習，鞏固數學基礎。",
+                url: "https://www.ccl.edu.hk",
+                icon: "fa-calculator",
+                badge: "數學科",
+                badgeColor: "bg-amber-100 text-amber-700 border border-amber-200"
+            },
+            {
+                title: "數學科：STEM 奧數與解難挑戰站",
+                subject: "數學",
+                category: "math",
+                description: "提供趣味奧林匹克數學題目與動態解題示範，培養高階思維能力。",
+                url: "https://www.ccl.edu.hk",
                 icon: "fa-brain",
-                badge: "學科練習",
-                badgeColor: "bg-amber-100 text-amber-700"
+                badge: "奧數挑戰",
+                badgeColor: "bg-amber-100 text-amber-700 border border-amber-200"
             },
             {
-                title: "聯絡與學校資訊網頁",
-                description: "了解學校最新動態、行事曆及教職員聯絡方法。",
+                title: "常識科：科學探索與社會時事專區",
+                subject: "常識科",
+                category: "general",
+                description: "結合環保、個人健康、香港社會發展及基礎科學常識的線上閱讀與問答。",
                 url: "https://www.ccl.edu.hk",
-                category: "document",
-                icon: "fa-school",
-                badge: "學校資訊",
-                badgeColor: "bg-blue-100 text-blue-700"
+                icon: "fa-globe",
+                badge: "常識科",
+                badgeColor: "bg-blue-100 text-blue-700 border border-blue-200"
+            },
+            {
+                title: "常識科：健康生活與公民教育網頁",
+                subject: "常識科",
+                category: "general",
+                description: "推廣健康飲食、良好生活習慣及公民權責的互動學習短片與練習。",
+                url: "https://www.ccl.edu.hk",
+                icon: "fa-heart-pulse",
+                badge: "健康教育",
+                badgeColor: "bg-blue-100 text-blue-700 border border-blue-200"
+            },
+            {
+                title: "官方通告與指引文件 (PDF)",
+                subject: "其他/通告",
+                category: "other",
+                description: "檢視 PDF 原檔案（2627_080.pdf）了解完整的連結清單與學校詳細通告內容。",
+                url: "https://www.ccl.edu.hk/file_browser/Uploads/2627/2627_080.pdf?openinbrowser=0",
+                icon: "fa-file-pdf",
+                badge: "官方 PDF",
+                badgeColor: "bg-rose-100 text-rose-700 border border-rose-200"
             }
         ];
 
@@ -129,7 +177,8 @@
             const filtered = resources.filter(item => {
                 const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
                 const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+                                      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      item.subject.toLowerCase().includes(searchQuery.toLowerCase());
                 return matchesCategory && matchesSearch;
             });
 
@@ -144,20 +193,21 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group";
+                card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group";
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <i class="fa-solid ${item.icon}"></i>
                             </div>
-                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${item.badgeColor}">${item.badge}</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full ${item.badgeColor}">${item.badge}</span>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors">${item.title}</h3>
+                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">${item.subject}</span>
+                        <h3 class="text-lg font-bold text-slate-800 mt-1 mb-2 group-hover:text-blue-600 transition-colors">${item.title}</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">${item.description}</p>
                     </div>
-                    <a href="${item.url}" target="_blank" class="w-full bg-slate-50 hover:bg-indigo-600 hover:text-white text-slate-700 border border-slate-200 hover:border-transparent py-2.5 px-4 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all">
-                        <span>進入連結</span>
+                    <a href="${item.url}" target="_blank" class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-700 border border-slate-200 hover:border-transparent py-2.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all">
+                        <span>進入科目連結</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                     </a>
                 `;
@@ -175,11 +225,11 @@
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => {
-                    b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
                     b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
                 });
                 btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-                btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
 
                 currentCategory = btn.getAttribute('data-category');
                 renderResources();
